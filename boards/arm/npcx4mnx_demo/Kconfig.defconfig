@@ -1,0 +1,16 @@
+# Copyright (c) 2023 Nuvoton Technology Corporation.
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_npcx4mnx_demo
+
+config BOARD
+	default "npcx4mnx_demo"
+
+endif # BOARD_npcx4mnx_demo
+
+config SYS_CLOCK_TICKS_PER_SEC
+	default 1000
+
+config INPUT
+	bool "Input configuration option"
+	default y if KSCAN

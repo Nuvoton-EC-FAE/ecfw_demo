@@ -1,0 +1,31 @@
+west:
+  url: https://github.com/zephyrproject-rtos/west
+  version: v0.7.2
+
+manifest:
+  remotes:
+    - name: zephyrproject
+      url-base: https://github.com/zephyrproject-rtos 
+    - name: zephyrproject_nuvoton
+      url-base: https://github.com/Nuvoton-EC-FAE/
+
+  projects:
+    - name: zephyr
+      path: zephyr
+      remote: zephyrproject_nuvoton
+      revision: npcx-v3.2.0
+      clone-depth: 1
+      west-commands: scripts/west-commands.yml
+
+    - name: cmsis
+      remote: zephyrproject
+      revision: 093de61c2a7d12dc9253daf8692f61f793a9254a
+      path: modules/hal/cmsis
+      groups:
+        - hal
+    - name: mcuboot
+      remote: zephyrproject
+      revision: 13f63976bca672ee018f9d55f1e31f02f4135b64
+      path: bootloader/mcuboot
+  self:
+    path: ecfw_demo

@@ -1,0 +1,23 @@
+Some additional patches are required to be applied to the Zephyr kernel
+for building the Basic ECFW App. The current EC App is based out of
+Zephyr v3.2 and hence these patches need to be applied on that branch.
+These patches are expected to be part of the future Zephyr releases (if
+they are not already integrated).
+
+Note: Below steps assume environment has been setup as indicated in the
+main Nuvoton Open source EC FW documentation.
+
+
+1) Clone and check out the main branch from zephyr(upstream)
+git clone https://github.com/zephyrproject-rtos/zephyr.git
+cd zephyr
+git checkout tags/v3.2.0
+git checkout -b my_new_branch tags/v3.2.0
+
+
+2) Apply zephyr patches on to the kernel branch
+git am ../ecfw/zephyr_patches/*.patch
+
+3) Building the code for NPCX4_evb (for e.g)
+cd ../ecfw
+west build -p always -b npcx4mnx_demo app/demo
