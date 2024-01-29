@@ -13,19 +13,19 @@ manifest:
     - name: zephyr
       path: zephyr
       remote: zephyrproject_nuvoton
-      revision: npcx-v3.2.0
+      revision: npcx-v3.5.0
       clone-depth: 1
       west-commands: scripts/west-commands.yml
 
     - name: cmsis
       remote: zephyrproject
-      revision: 093de61c2a7d12dc9253daf8692f61f793a9254a
+      revision: 5a00331455dd74e31e80efa383a489faea0590e3
       path: modules/hal/cmsis
       groups:
         - hal
     - name: mcuboot
       remote: zephyrproject
-      revision: 13f63976bca672ee018f9d55f1e31f02f4135b64
+      revision: 13767d0b72eb14ce42eb8aad1e5a133ef66afc54
       path: bootloader/mcuboot
   self:
     path: ecfw_demo

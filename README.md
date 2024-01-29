@@ -14,17 +14,17 @@ Refer to the official [Zephyr Getting Started Guide](https://docs.zephyrproject.
 
 ***ECFW_DEMO has been successfully build on Windows 10/11 x64 and Ubuntu systems.***
 
-#### Install dependencies
+#### [1. Install dependencies](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#install-dependencies)
 
-Steps 2.1 and 2.2 from Zephyr guide are mandatory.
+Install some host dependencies using your package manager.
 
-#### Get Zephyr and Python dependencies
+#### [2. Get Zephyr and Python dependencies](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#get-zephyr-and-install-python-dependencies)
 
-Steps 3.1, 3.2, 3.3, 3.4, 3.5 and 3.7 from Zephyr guide are mandatory. This will retrieve a copy Zephyr RTOS and install all python dependencies.
+This will retrieve a copy Zephyr RTOS and install all python dependencies.
 
-#### Install Zephyr SDK and toolchain
+#### [3. Install Zephyr SDK and toolchain](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#install-the-zephyr-sdk)
 
-Steps 4.1, 4.2 and 4.3 from Zephyr guide are mandatory. Step 4.4 is only required if flashing HW via command line instead of using Dediprog.
+The Zephyr Software Development Kit (SDK) contains toolchains for each of Zephyr’s supported architectures, which include a compiler, assembler, linker and other programs required to build Zephyr applications.
 
 ### Getting EC FW framework code
 
@@ -33,9 +33,9 @@ Steps 4.1, 4.2 and 4.3 from Zephyr guide are mandatory. Step 4.4 is only require
 Create a folder sandbox and clone ecfw_demo project
 
 ```shell
-mkdir ~/sandbox
-cd ~/sandbox
-git clone https://github.com/Nuvoton-EC-FAE/ecfw_demo
+    mkdir ~/sandbox
+    cd ~/sandbox
+    git clone https://github.com/Nuvoton-EC-FAE/ecfw_demo
 ```
 
 #### Obtain the dependencies
@@ -43,15 +43,26 @@ git clone https://github.com/Nuvoton-EC-FAE/ecfw_demo
 Navigate to west manifest location inside ecfw_demo and re-initialize west
 
 ```shell
-cd ecfw_demo
-west init -l
+    cd ecfw_demo
+    west init -l
 ```
 
 Retrieve all external project dependencies
 
 ```shell
-cd ..
-west update
+    cd ..
+    west update
+```
+
+#### Switch different version supports under ecfw_demo
+
+```shell
+    #e.g. Switching from version v3.2 to v3.5
+    cd ecfw_demo
+    git checkout v3.5
+    # Retrieve all external project dependencies
+    cd ..
+    west update
 ```
 
 ### Build & Run
@@ -61,9 +72,9 @@ west update
 Go back to ecfw_demo main folder and build the application and all its dependencies. Below commands indicate details for each board. See Supported hardware section for more details.
 
 ```shell
-cd ecfw_demo
-# Building for NPCX4mnx 
-west build -p always -b npcx4mnx_demo app/demo
+    cd ecfw_demo
+    # Building for NPCX4mnx 
+    west build -p always -b npcx4mnx_demo app/demo
 ```
 
 #### Flash EC FW
