@@ -8,8 +8,8 @@
 #include <zephyr/kernel.h>
 #include <zephyr/shell/shell.h>
 #include <version.h>
-
-static const char *app_version = "1.0.0";
+#include <app_version.h>
+#include <stdio.h>
 
 
 static int cmd_info_board(const struct shell *sh, size_t argc, char **argv)
@@ -37,7 +37,7 @@ static int cmd_info_app_version(const struct shell *sh, size_t argc, char **argv
 	ARG_UNUSED(argc);
 	ARG_UNUSED(argv);
 
-	shell_print(sh, "App version %s", app_version);
+	shell_print(sh, "App version %s %s", APP_VERSION_STRING,STRINGIFY(APP_BUILD_VERSION));
 
 	return 0;
 }
