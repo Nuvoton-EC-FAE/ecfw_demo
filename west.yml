@@ -7,13 +7,13 @@ manifest:
     - name: zephyrproject
       url-base: https://github.com/zephyrproject-rtos 
     - name: zephyrproject_nuvoton
-      url-base: https://github.com/Nuvoton-EC-FAE/
+      url-base: https://github.com/Nuvoton-EC-FAE
 
   projects:
     - name: zephyr
       path: zephyr
       remote: zephyrproject_nuvoton
-      revision: npcx-v3.2.0
+      revision: v3.2-drivers-upgrade-20240305
       clone-depth: 1
       west-commands: scripts/west-commands.yml
 
