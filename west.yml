@@ -13,18 +13,30 @@ manifest:
     - name: zephyr
       path: zephyr
       remote: zephyrproject_nuvoton
-      revision: v3.5-drivers-upgrade-20240305
+      # Corresponding configuration for revision
+      # Branch name : tag or commit hash
+      # npcx-v3.5-branch: v3.5-drivers-upgrade-20240305
+      # npcx-v3.6-branch: npcx-v3.6.0
+      revision: npcx-v3.6-branch
       clone-depth: 1
       west-commands: scripts/west-commands.yml
 
     - name: cmsis
       remote: zephyrproject
-      revision: 5a00331455dd74e31e80efa383a489faea0590e3
+      # Corresponding configuration for revision
+      # Branch name : tag or commit hash
+      # npcx-v3.5-branch: 5a00331455dd74e31e80efa383a489faea0590e3
+      # npcx-v3.6-branch: 4b96cbb174678dcd3ca86e11e1f24bc5f8726da0
+      revision: 4b96cbb174678dcd3ca86e11e1f24bc5f8726da0
       path: modules/hal/cmsis
       groups:
         - hal
     - name: mcuboot
       remote: zephyrproject
+      # Corresponding configuration for revision
+      # Branch name : tag or commit hash
+      # npcx-v3.5-branch: 13767d0b72eb14ce42eb8aad1e5a133ef66afc54
+      # npcx-v3.6-branch: a4eda30f5b0cfd0cf15512be9dcd559239dbfc91
       revision: 13767d0b72eb14ce42eb8aad1e5a133ef66afc54
       path: bootloader/mcuboot
   self:

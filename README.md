@@ -95,6 +95,9 @@ cd ..
 west update
 ```
 
+> **Note:** To switch to npcx-v3.6-branch, refer to the configuration in west.yml.
+
+
 ### Build & Run
 
 #### Build EC FW
