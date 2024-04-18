@@ -11,6 +11,6 @@ endif # BOARD_npcx4mnx_demo
 config SYS_CLOCK_TICKS_PER_SEC
 	default 1000
 
-config INPUT
-	bool "Input configuration option"
-	default y if KSCAN
+config KSCAN
+	bool "KSCAN configuration option"
+	default y 

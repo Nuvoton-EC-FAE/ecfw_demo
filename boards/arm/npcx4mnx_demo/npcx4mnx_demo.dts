@@ -16,8 +16,8 @@
 		zephyr,sram = &sram0;
 		zephyr,console = &uart1;
 		zephyr,flash = &flash0;
-		zephyr,keyboard-scan = &kscan_input;
 		zephyr,shell-uart = &uart1;
+		zephyr,keyboard-scan = &kscan0;
 
 	};
 
@@ -31,7 +31,7 @@
 		spi-flash0 = &int_flash;
 		taf-flash = &int_flash;
 		/* For kscan test suites */
-		kscan0 = &kscan_input;
+		kscan0 = &kscan0;
 	};
 
 	leds-pwm {
@@ -105,20 +105,32 @@
 	pinctrl-names = "default";
 };
 
-&kbd {
+&kscan0 {
 	/* Demonstrate a 13 x 8 keyboard matrix on evb */
-	pinctrl-0 = <&ksi0_gp31 &ksi1_gp30 &ksi2_gp27 &ksi3_gp26
-		     &ksi4_gp25 &ksi5_gp24 &ksi6_gp23 &ksi7_gp22
-		     &kso00_gp21 &kso01_gp20 &kso02_gp17 &kso03_gp16
-		     &kso04_gp15 &kso05_gp14 &kso06_gp13 &kso07_gp12
-		     &kso08_gp11 &kso09_gp10 &kso10_gp07 &kso11_gp06
-		     &kso12_gp05>;
+	pinctrl-0 = <&ksi0_gp31 /* KSI0 PIN31 */
+		     &ksi1_gp30 /* KSI1 PIN30 */
+		     &ksi2_gp27 /* KSI2 PIN27 */
+		     &ksi3_gp26 /* KSI3 PIN26 */
+		     &ksi4_gp25 /* KSI4 PIN25 */
+		     &ksi5_gp24 /* KSI5 PIN24 */
+		     &ksi6_gp23 /* KSI6 PIN23 */
+		     &ksi7_gp22 /* KSI7 PIN22 */
+		     &kso00_gp21 /* KSO00 PIN21 */
+		     &kso01_gp20 /* KSO01 PIN20 */
+		     &kso02_gp17 /* KSO02 PIN17 */
+		     &kso03_gp16 /* KSO03 PIN16 */
+		     &kso04_gp15 /* KSO04 PIN15 */
+		     &kso05_gp14 /* KSO05 PIN14 */
+		     &kso06_gp13 /* KSO06 PIN13 */
+		     &kso07_gp12 /* KSO07 PIN12 */
+		     &kso08_gp11 /* KSO08 PIN11 */
+		     &kso09_gp10 /* KSO09 PIN10 */
+		     &kso10_gp07 /* KSO10 PIN07 */
+		     &kso11_gp06 /* KSO11 PIN06 */
+		     &kso12_gp05 /* KSO12 PIN05 */
+		     >;
 	pinctrl-names = "default";
 	row-size = <8>;
 	col-size = <13>;
 	status = "okay";
-
-	kscan_input: kscan-input {
-		compatible = "zephyr,kscan-input";
-	};
 };
