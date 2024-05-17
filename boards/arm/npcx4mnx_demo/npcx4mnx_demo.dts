@@ -134,3 +134,7 @@
 	col-size = <13>;
 	status = "okay";
 };
+
+&bbram {
+	status = "okay";
+};
