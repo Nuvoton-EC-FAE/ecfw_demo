@@ -1,0 +1,30 @@
+# Copyright (c) 2022 Nuvoton Technology Corporation.
+# SPDX-License-Identifier: Apache-2.0
+
+description: NPCX Power Switch Logic (PSL) control node for hibernating
+
+compatible: "npcx-hibernate-psl"
+
+include: [base.yaml, pinctrl-device.yaml]
+
+properties:
+  psl-driven-type:
+    required: true
+    type: string
+    description: |
+      PSL_OUT is driven by GPIO or FW Control bit
+    enum:
+      - "gpio-driven"
+      - "fw-ctrl-driven"
+
+  enable-gpios:
+    type: phandle-array
+    description: |
+      GPIO to used to turn on/off the Core Domain power supply (VCC1) of NPCX
+      embedded controller (EC)
+
+  pinctrl-0:
+    required: true
+
+  pinctrl-names:
+    required: true
