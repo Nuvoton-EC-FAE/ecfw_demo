@@ -57,10 +57,23 @@ static int cmd_shell_help(const struct shell *sh, size_t argc, char **argv)
 	return 0;
 }
 
+#ifdef CORE_DEBUG_COREDUMP
+	void trigger_core_dump(void)
+	{
+		printk("Triggering core dump...\n");
+		k_panic();
+	}
+#endif // CORE_DEBUG_COREDUMP
 
 void main(void)
 {
 	printk("Nuvoton - Zephyr RTOS: %s\n", CONFIG_BOARD);
+
+	#ifdef CONFIG_DEBUG_COREDUMP
+		k_sleep(K_SECONDS(5));
+		trigger_core_dump();
+	#endif // CONFIG_DEBUG_COREDUMP
+
 }
 
 SHELL_STATIC_SUBCMD_SET_CREATE(subinfo,

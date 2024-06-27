@@ -37,7 +37,7 @@ manifest:
       # Branch name : tag or commit hash
       # npcx-v3.5-branch: 13767d0b72eb14ce42eb8aad1e5a133ef66afc54
       # npcx-v3.6-branch: a4eda30f5b0cfd0cf15512be9dcd559239dbfc91
-      revision: 13767d0b72eb14ce42eb8aad1e5a133ef66afc54
+      revision: a4eda30f5b0cfd0cf15512be9dcd559239dbfc91
       path: bootloader/mcuboot
   self:
     path: ecfw_demo
