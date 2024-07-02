@@ -6,3 +6,14 @@
 # module options by going to Zephyr -> Modules in Kconfig.
 
 rsource "drivers/Kconfig"
+
+config EC_LOG_LEVEL
+    int "Log level for EC module"
+    default 3
+    help
+      Set the log level for the EC module. The log levels are:
+      0: None
+      1: Error
+      2: Warning
+      3: Info
+      4: Debug
