@@ -35,8 +35,20 @@ void k_sys_fatal_error_handler(unsigned int reason, const z_arch_esf_t *pEsf)
     LOG_ERR("Coredump triggered! Reason: %u\n", reason);
     // Simulate coredump output
     for (size_t i = 0; i < sizeof(*pEsf); i++) {
-        // LOG_ERR("%s", ((uint8_t *)pEsf)[i]);
+        LOG_ERR("%x", ((uint8_t *)pEsf)[i]);
         buf = (uint8_t *)pEsf;
+    }
+
+    if (pEsf) {
+        printk("Exception Stack Frame:\n");
+        printk("  R0:  0x%08x\n", pEsf->basic.r0);
+        printk("  R1:  0x%08x\n", pEsf->basic.r1);
+        printk("  R2:  0x%08x\n", pEsf->basic.r2);
+        printk("  R3:  0x%08x\n", pEsf->basic.r3);
+        printk("  R12: 0x%08x\n", pEsf->basic.r12);
+        printk("  LR:  0x%08x\n", pEsf->basic.lr);
+        printk("  PC:  0x%08x\n", pEsf->basic.pc);
+        printk("  xPSR:0x%08x\n", pEsf->basic.xpsr);
     }
     // LOG_ERR("\n");
     uint8_t log_ptr = 0;
