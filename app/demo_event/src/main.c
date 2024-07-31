@@ -11,29 +11,30 @@
 #define EVENT_B 0x02
 #define EVENT_C 0x04
 
-K_EVENT_DEFINE(test_event);
+// K_EVENT_DEFINE(test_event);
+struct k_event test_event;
 
 void sender_thread(void *p1, void *p2, void *p3)
 {
     while (1) {
-        k_event_set(&test_event, EVENT_A);
-        printk("Sender: Set EVENT_A\n");
+        k_event_post(&test_event, EVENT_A);
+        printk("Sender: Post EVENT_A\n");
         k_msleep(1000);
 
-        k_event_set(&test_event, EVENT_B);
-        printk("Sender: Set EVENT_B\n");
+        k_event_post(&test_event, EVENT_B);
+        printk("Sender: Post EVENT_B\n");
         k_msleep(1000);
 
-        k_event_set(&test_event, EVENT_C);
-        printk("Sender: Set EVENT_C\n");
+        k_event_post(&test_event, EVENT_C);
+        printk("Sender: Post EVENT_C\n");
         k_msleep(1000);
 
-        k_event_set(&test_event, EVENT_A | EVENT_B);
-        printk("Sender: Set EVENT_AB\n");
+        k_event_post(&test_event, EVENT_A | EVENT_B);
+        printk("Sender: Post EVENT_AB\n");
         k_msleep(1000);
 
-        k_event_set(&test_event, EVENT_A | EVENT_B | EVENT_C);
-        printk("Sender: Set EVENT_ABC\n");
+        k_event_post(&test_event, EVENT_A | EVENT_B | EVENT_C);
+        printk("Sender: Post EVENT_ABC\n");
         k_msleep(1000);
     }
 }
@@ -112,4 +113,6 @@ K_THREAD_DEFINE(receiver_id2, STACK_SIZE, receiver2_thread, NULL, NULL, NULL, RE
 void main(void)
 {
     printk("Main: Event API test started\n");
+    k_event_init(&test_event);
+
 }
