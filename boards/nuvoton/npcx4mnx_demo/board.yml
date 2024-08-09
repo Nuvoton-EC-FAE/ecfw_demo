@@ -1,0 +1,5 @@
+board:
+  name: npcx4mnx_demo
+  vendor: nuvoton
+  socs:
+  - name: npcx4m8f
