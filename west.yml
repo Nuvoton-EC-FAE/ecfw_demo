@@ -39,5 +39,11 @@ manifest:
       # npcx-v3.6-branch: a4eda30f5b0cfd0cf15512be9dcd559239dbfc91
       revision: a4eda30f5b0cfd0cf15512be9dcd559239dbfc91
       path: bootloader/mcuboot
+    - name: mbedtls
+      remote: zephyrproject
+      revision: 6ec4abdcda78dfc47315af568f93e5ad4398dea0
+      path: modules/crypto/mbedtls
+      groups:
+        - crypto
   self:
     path: ecfw_demo
