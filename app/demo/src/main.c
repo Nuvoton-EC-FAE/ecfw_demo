@@ -68,6 +68,7 @@ static int cmd_shell_help(const struct shell *sh, size_t argc, char **argv)
 void main(void)
 {
 	printk("Nuvoton - Zephyr RTOS: %s\n", CONFIG_BOARD);
+	printk("Zephyr version %s", KERNEL_VERSION_STRING);
 
 	#ifdef CONFIG_DEBUG_COREDUMP
 		k_sleep(K_SECONDS(5));
