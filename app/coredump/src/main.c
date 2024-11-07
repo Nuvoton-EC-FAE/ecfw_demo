@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2014 Wind River Systems, Inc.
+ * Copyright (c) 2024 NUVOTON Inc.
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -7,23 +7,22 @@
 #include <zephyr/kernel.h>
 #include <zephyr/sys/printk.h>
 #include <zephyr/debug/coredump.h>
+#include <zephyr/shell/shell.h>
+#include <zephyr/logging/log.h>
+// #include <coredump_other.h>
 
-#ifdef CONFIG_COVERAGE_DUMP
-#include <zephyr/debug/gcov.h>
-#endif
+
+#define STACK_SIZE 1024
+#define THREAD_PRIORITY 5
+
+LOG_MODULE_REGISTER(demo_coredump, CONFIG_EC_LOG_LEVEL);
 
 
-void k_sys_fatal_error_handler(unsigned int reason, const z_arch_esf_t *pEsf)
-{
-	ARG_UNUSED(pEsf);
+static struct k_thread thread1;
+static K_THREAD_STACK_DEFINE(stack1, STACK_SIZE);
 
-	printk("%s is expected; reason = %u; halting ...\n", __func__, reason);
+static int counter1 = 0;
 
-#ifdef CONFIG_COVERAGE_DUMP
-	gcov_coverage_dump();  /* LCOV_EXCL_LINE */
-#endif
-	k_fatal_halt(reason);
-}
 
 void func_3(uint32_t *addr)
 {
@@ -55,18 +54,47 @@ void func_3(uint32_t *addr)
 
 void func_2(uint32_t *addr)
 {
-	func_3(addr);
+    int c2 = 0;
+    while (1) {
+        c2++;
+        if (c2 >= 20) {
+            printk("counter1 = %d\n", counter1);
+	        func_3(addr);
+        }
+    } 
 }
 
 void func_1(uint32_t *addr)
 {
-	func_2(addr);
+    int c1 = 0;
+    while (1) {
+        c1++;
+        if (c1 >= 10) {
+            printk("counter1 = %d\n", counter1);
+	        func_2(addr);
+        }
+    }    
 }
 
-int main(void)
+void thread1_entry(void *p1, void *p2, void *p3)
 {
-	printk("Coredump: %s\n", CONFIG_BOARD);
+    while (1) {
+        counter1++;
+        printk("Thread 1: counter1 = %d\n", counter1);
+        if (counter1 >= 20) {
 
-	func_1(0);
-	return 0;
+            printk("counter1 = %d\n", counter1);
+	        func_1(0);
+        }
+        k_sleep(K_MSEC(500));
+    }
+}
+
+
+
+void main(void)
+{
+    k_tid_t tid1 = k_thread_create(&thread1, stack1, STACK_SIZE, thread1_entry, NULL, NULL, NULL, THREAD_PRIORITY, 0, K_NO_WAIT);
+
+    k_thread_join(tid1, K_FOREVER);
 }
