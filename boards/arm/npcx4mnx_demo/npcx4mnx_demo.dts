@@ -17,7 +17,7 @@
 		zephyr,console = &uart1;
 		zephyr,flash = &flash0;
 		zephyr,shell-uart = &uart1;
-		zephyr,keyboard-scan = &kscan0;
+		// zephyr,keyboard-scan = &kscan0;
 
 	};
 
@@ -32,6 +32,8 @@
 		taf-flash = &int_flash;
 		/* For kscan test suites */
 		kscan0 = &kscan0;
+		spi-flash1 = &shd_flash0;
+		spi-flash2 = &shd_flash1;
 	};
 
 	leds-pwm {
@@ -57,6 +59,14 @@
 	current-speed = <115200>;
 	/* Use UART1_SL2 ie. PIN64.65 */
 	pinctrl-0 = <&uart1_2_sin_gp64 &uart1_2_sout_gp65>;
+	pinctrl-names = "default";
+};
+
+&uart2 {
+	status = "okay";
+	current-speed = <115200>;
+	/* Use UART1_SL2 ie. PIN64.65 */
+	pinctrl-0 = <&uart2_sin_gp75 &uart2_sout_gp86>;
 	pinctrl-names = "default";
 };
 
@@ -137,4 +147,47 @@
 
 &bbram {
 	status = "okay";
+};
+
+&qspi_fiu1 {
+	status = "okay";
+	en-direct-access-2dev;
+
+	shd_flash0: w25q128@0 {
+		compatible ="nuvoton,npcx-fiu-nor";
+		size = <0x10000000>; /* 268435456 bits = 32M Bytes */
+		max-timeout = <86784>;
+		reg = <0>;
+		quad-enable-requirements = "S2B1v1";
+		status = "okay";
+
+		/* Enable 4Byte address mode when the flash size > 16MB */
+		enter-4byte-addr = <0x85>;
+
+		/* quad spi bus configuration of nor flash device */
+		qspi-flags = <NPCX_QSPI_SW_CS0>;
+		mapped-addr = <0x60000000>;
+		pinctrl-0 = <&fiu_ext_io0_io1_clk_cs_gpa4_96_a2_a0
+			     &fiu_ext_quad_io2_io3_gp93_a7
+			     &ext_flash_tris_off>;
+		pinctrl-names = "default";
+	};
+
+	shd_flash1: w25q128@1 {
+		compatible ="nuvoton,npcx-fiu-nor";
+		size = <0x10000000>; /* 134217728 bits = 16 Mbytes */
+		max-timeout = <86784>;
+		reg = <1>;
+		quad-enable-requirements = "S2B1v1";
+		status = "okay";
+
+		/* quad spi bus configuration of nor flash device */
+		qspi-flags = <(NPCX_QSPI_SW_CS0 | NPCX_QSPI_SEC_FLASH_SL)>;
+		mapped-addr = <0x68000000>;
+		pinctrl-0 = <&fiu_ext_io0_io1_clk_cs_gpa4_96_a2_a0
+			     &fiu_ext_quad_io2_io3_gp93_a7
+			     &ext_flash_tris_off
+			     &ext_flash_cs1_sl>;
+		pinctrl-names = "default";
+	};
 };
