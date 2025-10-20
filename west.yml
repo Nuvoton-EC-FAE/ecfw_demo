@@ -33,5 +33,9 @@ manifest:
       remote: zephyrproject
       revision: fb2cf0ec3da3687b93f28e556ab682bdd4b85223
       path: bootloader/mcuboot
+    - name: libdemo
+      remote: zephyrproject_nuvoton
+      revision: 72e23b0445537edc87e79cdc16265b58947d5221
+      path: modules/lib/libdemo
   self:
     path: ecfw_demo

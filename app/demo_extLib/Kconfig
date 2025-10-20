@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Kconfig for demo_extLib application
+
+source "Kconfig.zephyr"
+
+menu "Libdemo Demo Configuration"
+
+choice LIBDEMO_BUILD_TYPE
+	bool "Libdemo library build type"
+	default LIBDEMO_BUILD_DEBUG
+	help
+	  Select which version of the libdemo library to use.
+	  Debug version includes symbols for debugging (can step into source).
+	  Release version is optimized and stripped (cannot step into source).
+
+config LIBDEMO_BUILD_DEBUG
+	bool "Debug build"
+	help
+	  Use libdemo_debug.a - includes debug symbols, allows stepping into library code.
+
+config LIBDEMO_BUILD_RELEASE
+	bool "Release build"
+	help
+	  Use libdemo.a - optimized and stripped, smaller size but cannot debug library internals.
+
+endchoice
+
+endmenu
